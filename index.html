@@ -12,20 +12,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* CSS Variables yang diperbarui untuk tampilan modern */
+        /* 
+           PALET WARNA: Burgundy, Hitam & Perak 
+           Fokus: KONTRAS TINGGI (High Contrast) 
+        */
         :root {
-            --primary: #2563eb;       /* Biru Royal lebih cerah */
-            --secondary: #0f172a;     /* Biru Gelap (Slate) */
-            --accent: #3b82f6;        /* Biru Terang */
-            --gold: #f59e0b;          /* Emas Prestasi */
-            --bg-body: #f8fafc;       /* Abu-abu sangat muda */
-            --text-main: #334155;     /* Teks utama */
-            --text-light: #64748b;    /* Teks sekunder */
-            --white: #ffffff;
-            --glass: rgba(255, 255, 255, 0.85);
-            --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.08);
-            --shadow-hover: 0 20px 40px -10px rgba(37, 99, 235, 0.15);
-            --radius: 24px;
+            --primary: #9d174d;       /* Burgundy Lebih Terang agar kontras */
+            --primary-dark: #700020;  /* Burgundy Gelap */
+            --bg-body: #050505;       /* Hitam Pekat (Background) */
+            --bg-card: #0f0f0f;       /* Abu-abu Sangat Gelap (Card) */
+            --text-head: #ffffff;     /* Putih Murni untuk Judul */
+            --text-body: #e2e8f0;     /* Abu-abu Muda Terang untuk Teks */
+            --text-muted: #cbd5e1;    /* Abu-abu Medium untuk info sekunder */
+            --silver-accent: #C0C0C0; /* Perak untuk Border & Dekorasi */
+            --glass: rgba(15, 15, 15, 0.85); /* Kaca Gelap */
+            --shadow-glow: 0 0 30px rgba(157, 23, 77, 0.3);
+            --radius: 20px;
         }
 
         /* Reset */
@@ -41,13 +43,13 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            color: var(--text-main);
+            color: var(--text-body); /* Teks body terang secara default */
             background-color: var(--bg-body);
             line-height: 1.7;
             overflow-x: hidden;
         }
 
-        /* Animasi Scroll (Fade Up) */
+        /* Animasi Scroll */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -59,7 +61,7 @@
             transform: translateY(0);
         }
 
-        /* Navigasi Glassmorphism */
+        /* Navigasi Mewah dengan Kontras Tinggi */
         nav {
             position: fixed;
             top: 20px;
@@ -68,11 +70,11 @@
             width: 90%;
             max-width: 1000px;
             background: var(--glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(192, 192, 192, 0.3); /* Border Perak Terang */
             border-radius: 50px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
             z-index: 1000;
             padding: 0.8rem 2rem;
             display: flex;
@@ -82,10 +84,11 @@
 
         .logo {
             font-weight: 800;
-            font-size: 1.4rem;
-            color: var(--secondary);
+            font-size: 1.5rem;
+            color: var(--text-head); /* Putih */
             text-decoration: none;
             letter-spacing: -0.5px;
+            text-transform: uppercase;
         }
 
         .logo span {
@@ -100,10 +103,10 @@
 
         .nav-links a {
             text-decoration: none;
-            color: var(--secondary);
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
+            color: var(--text-body); /* Putih/Abu Terang */
+            font-weight: 600; /* Tebal agar lebih terbaca */
+            font-size: 1rem;
+            transition: all 0.3s ease;
             position: relative;
         }
 
@@ -115,6 +118,7 @@
             bottom: -4px;
             left: 0;
             background-color: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
             transition: width 0.3s ease;
         }
 
@@ -124,12 +128,13 @@
 
         .nav-links a:hover {
             color: var(--primary);
+            text-shadow: 0 0 8px var(--primary);
         }
 
         .menu-toggle {
             display: none;
             font-size: 1.5rem;
-            color: var(--secondary);
+            color: var(--text-head);
             cursor: pointer;
         }
 
@@ -145,126 +150,177 @@
 
         /* HOME SECTION */
         #home {
-            background: radial-gradient(circle at top right, #dbeafe 0%, transparent 40%),
-                        radial-gradient(circle at bottom left, #e0e7ff 0%, transparent 40%);
+            /* Background Gradasi Sangat Gelap */
+            background: radial-gradient(circle at top center, #2d0f19 0%, #050505 80%);
             min-height: 90vh;
             justify-content: center;
             text-align: center;
             position: relative;
+            overflow: hidden;
+        }
+
+        /* Efek Cahaya Halus */
+        #home::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            background: radial-gradient(circle, rgba(157, 23, 77, 0.15) 0%, transparent 50%);
+            animation: rotateBg 15s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes rotateBg {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .profile-pic-container {
             position: relative;
             margin-bottom: 2rem;
             display: inline-block;
+            z-index: 1;
         }
 
         .profile-pic-home {
-            width: 240px;
-            height: 240px;
+            width: 250px;
+            height: 250px;
             border-radius: 50%;
             object-fit: cover;
             object-position: center top;
-            border: 6px solid var(--white);
+            border: 4px solid var(--silver-accent); /* Border Perak */
             position: relative;
             z-index: 2;
             transition: transform 0.5s ease;
         }
+        
+        .profile-pic-home:hover {
+            transform: scale(1.05);
+        }
 
-        /* Efek Cincin Berdenyut di belakang foto */
+        /* Glow Efek */
         .profile-glow {
             position: absolute;
-            top: -15px;
-            left: -15px;
-            right: -15px;
-            bottom: -15px;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
             border-radius: 50%;
-            background: linear-gradient(45deg, var(--primary), var(--accent));
+            background: linear-gradient(45deg, var(--primary), #000000, var(--silver-accent));
             z-index: 1;
-            animation: pulse 2s infinite;
-            opacity: 0.7;
+            animation: pulse 3s infinite;
+            opacity: 1;
+            filter: blur(8px);
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(1.05); opacity: 0.4; }
-            100% { transform: scale(1); opacity: 0.7; }
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; box-shadow: 0 0 40px var(--primary); }
+            100% { transform: scale(1); opacity: 0.8; }
         }
 
-        /* Style untuk "Hello I am" */
         .greeting {
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: var(--primary);
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--primary); /* Burgundy Terang */
             margin-bottom: 0.5rem;
             display: block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            z-index: 1;
         }
 
         .home-content h1 {
-            font-size: 3.5rem;
-            color: var(--secondary);
+            font-size: 4.5rem;
             margin-bottom: 1rem;
             font-weight: 800;
-            line-height: 1.2;
-            letter-spacing: -1px;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            z-index: 1;
+            
+            /* Efek Teks Perak Logam */
+            background: linear-gradient(to bottom, #ffffff 0%, #cbd5e1 50%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
         }
 
         .motto-home {
             font-size: 1.3rem;
-            font-weight: 500;
-            color: var(--primary);
-            background: rgba(59, 130, 246, 0.1);
-            padding: 0.6rem 2rem;
-            border-radius: 12px;
+            font-weight: 600;
+            color: var(--text-head);
+            background: rgba(157, 23, 77, 0.2); /* Background Burgundy transparan */
+            border: 1px solid var(--primary);
+            padding: 0.8rem 2.5rem;
+            border-radius: 50px;
             display: inline-block;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(59, 130, 246, 0.2);
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 1;
+            box-shadow: 0 0 20px rgba(157, 23, 77, 0.2);
         }
 
+        /* Deskripsi dengan Kontras Tinggi */
         .about-description {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            max-width: 700px;
+            font-size: 1.2rem;
+            color: var(--text-body); /* Putih/Abu Terang */
+            max-width: 800px;
             margin: 0 auto 3rem auto;
-            font-weight: 300;
+            font-weight: 400;
+            z-index: 1;
+            border-left: 4px solid var(--primary);
+            padding-left: 25px;
+            text-align: left;
+            line-height: 1.8;
         }
 
         .scroll-down {
-            color: var(--primary);
-            font-size: 1.5rem;
+            color: var(--silver-accent);
+            font-size: 1.8rem;
             animation: float 2s infinite ease-in-out;
             cursor: pointer;
+            z-index: 1;
         }
 
         @keyframes float {
-            0%, 100% {transform: translateY(0);}
-            50% {transform: translateY(10px);}
+            0%, 100% {transform: translateY(0); opacity: 0.7;}
+            50% {transform: translateY(10px); opacity: 1;}
         }
 
         /* ABOUT SECTION */
         #about {
             padding-top: 4rem;
+            background: linear-gradient(180deg, var(--bg-body) 0%, #080808 100%);
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 4rem;
-            color: var(--secondary);
+            /* Efek Teks Putih Perak */
+            color: var(--text-head);
             font-weight: 700;
             position: relative;
             display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255,255,255,0.2);
         }
 
         .section-title::before {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
+            width: 80px;
             height: 4px;
             background: var(--primary);
+            box-shadow: 0 0 15px var(--primary);
             border-radius: 2px;
         }
 
@@ -275,13 +331,14 @@
             width: 100%;
         }
 
+        /* Card dengan Background Sangat Gelap & Teks Putih Terang */
         .about-card {
-            background: var(--white);
+            background: var(--bg-card);
             padding: 2.5rem;
             border-radius: var(--radius);
-            box-shadow: var(--shadow-soft);
-            border: 1px solid rgba(255,255,255,0.8);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            border: 1px solid rgba(255,255,255,0.08); /* Border halus */
+            transition: all 0.4s ease;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -293,23 +350,24 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
-            background: var(--primary);
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
             opacity: 0;
             transition: opacity 0.3s;
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
         }
 
         .about-card:hover::before {
             opacity: 1;
         }
 
-        .about-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
-        }
-
         .card-icon {
-            font-size: 2.8rem;
+            font-size: 3rem;
             margin-bottom: 1.5rem;
             width: 80px;
             height: 80px;
@@ -318,36 +376,37 @@
             margin-left: auto;
             margin-right: auto;
             transition: transform 0.3s;
+            background: rgba(255,255,255,0.05);
+            color: var(--primary); /* Ikon Berwarna Burgundy */
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .about-card:hover .card-icon {
-            transform: scale(1.1) rotate(5deg);
+            transform: scale(1.1);
+            background: var(--primary);
+            color: var(--text-head); /* Ikon berubah jadi putih saat hover */
+            box-shadow: 0 0 30px var(--primary);
         }
 
         .about-card h3 {
-            color: var(--secondary);
-            font-size: 1.4rem;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
+            color: var(--text-head); /* Judul Putih */
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-
-        /* Warna Ikon Berbeda per Kategori */
-        .icon-edu { color: var(--primary); background: #eff6ff; }
-        .icon-org { color: #8b5cf6; background: #f5f3ff; }
-        .icon-hobby { color: #10b981; background: #ecfdf5; }
-        .icon-achieve { color: var(--gold); background: #fffbeb; }
 
         .info-list {
             text-align: left;
         }
 
         .info-item {
-            margin-bottom: 1.2rem;
-            padding-bottom: 1.2rem;
-            border-bottom: 1px dashed #e2e8f0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
             display: flex;
             flex-direction: column;
-            transition: padding-left 0.3s;
         }
 
         .info-item:last-child {
@@ -356,39 +415,30 @@
             padding-bottom: 0;
         }
 
-        .about-card:hover .info-item {
-            padding-left: 10px; /* Sedikit geser saat hover */
-        }
-
         .label {
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             font-weight: 700;
-            color: #94a3b8;
-            margin-bottom: 0.3rem;
+            color: var(--primary); /* Label Burgundy */
+            margin-bottom: 0.5rem;
         }
 
         .value {
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 500;
-            color: var(--text-main);
-            line-height: 1.4;
+            color: var(--text-body); /* Isi teks Putih/Abu Terang */
+            line-height: 1.6;
         }
 
         /* CONTACT SECTION */
         #contact {
-            background-color: var(--secondary);
-            background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 100%);
-            color: var(--white);
+            background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%);
+            color: var(--text-head);
             padding-bottom: 6rem;
             position: relative;
         }
         
-        #contact .section-title {
-            color: var(--white);
-        }
-
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -399,7 +449,7 @@
         }
 
         .contact-item {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
             padding: 2rem;
             border-radius: 20px;
             display: flex;
@@ -407,52 +457,62 @@
             gap: 1.5rem;
             transition: all 0.3s ease;
             text-decoration: none;
-            color: var(--text-light);
+            color: var(--text-body); /* Teks Putih */
             border: 1px solid rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(5px);
         }
 
         .contact-item:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(157, 23, 77, 0.1); /* Tint Burgundy */
+            border-color: var(--primary);
             transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(157, 23, 77, 0.2);
         }
 
         .contact-icon-box {
             width: 50px;
             height: 50px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.4rem;
-            color: var(--accent);
+            color: var(--primary); /* Ikon Burgundy */
+            border: 1px solid rgba(255,255,255,0.1);
             flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover .contact-icon-box {
+            background: var(--primary);
+            color: var(--text-head); /* Jadi Putih */
+            border-color: var(--primary);
         }
 
         .contact-info h4 {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             opacity: 0.6;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.5rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            font-weight: 700;
         }
 
         .contact-info span {
-            font-weight: 500;
-            color: var(--white);
-            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-head); /* Teks Kontak Putih */
+            font-size: 1.05rem;
             word-break: break-word;
         }
 
         footer {
-            background: #020617;
-            color: #475569;
+            background: #000000;
+            color: #666;
             text-align: center;
             padding: 2rem;
             font-size: 0.9rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid #1a1a1a;
         }
 
         /* Mobile Responsive */
@@ -460,7 +520,8 @@
             nav {
                 width: 95%;
                 padding: 0.8rem 1.2rem;
-                top: 10px;
+                background: rgba(0,0,0,0.98);
+                border: 1px solid rgba(255,255,255,0.1);
             }
 
             .nav-links {
@@ -469,13 +530,13 @@
                 top: 70px;
                 left: 0;
                 width: 100%;
-                background: var(--white);
+                background: #050505;
                 flex-direction: column;
                 align-items: center;
                 padding: 2rem 0;
-                box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+                box-shadow: 0 20px 30px rgba(0,0,0,0.8);
                 border-radius: 20px;
-                border: 1px solid #f1f5f9;
+                border: 1px solid rgba(255,255,255,0.1);
             }
 
             .nav-links.active {
@@ -487,21 +548,20 @@
             }
 
             .home-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .motto-home {
-                font-size: 1rem;
-                padding: 0.5rem 1.5rem;
+                font-size: 2.8rem;
             }
 
             .about-description {
-                font-size: 0.95rem;
+                text-align: center;
+                border-left: none;
+                border-top: 3px solid var(--primary);
+                padding-top: 1.5rem;
+                padding-left: 0;
             }
 
             .profile-pic-home {
-                width: 180px;
-                height: 180px;
+                width: 200px;
+                height: 200px;
             }
             
             section {
@@ -516,7 +576,7 @@
 </head>
 <body>
 
-    <!-- Navigasi Modern -->
+    <!-- Navigasi Futuristik -->
     <nav>
         <a href="#" class="logo">Arlen<span>.</span></a>
         <div class="menu-toggle" id="mobile-menu">
@@ -524,9 +584,7 @@
         </div>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
-            <!-- Menu diubah menjadi About Me -->
             <li><a href="#about">About Me</a></li>
-            <!-- Menu diubah menjadi Contact Me -->
             <li><a href="#contact">Contact Me</a></li>
         </ul>
     </nav>
@@ -539,7 +597,6 @@
                 <img src="https://z-cdn-media.chatglm.cn/files/9a875a72-5abe-4b46-b6f8-a21c4b6e5d07.png?auth_key=1868451674-99596320bdf4400598df7f31d615e46a-0-1324d40c446b6c60f606afe7a6f79511" alt="Foto Profil Arlen" class="profile-pic-home">
             </div>
             
-            <!-- Teks Hello I am ditambahkan -->
             <span class="greeting">Hello, I am</span>
             <h1>Arlen Davy Saputra</h1>
             
@@ -557,14 +614,13 @@
 
     <!-- About Me Section -->
     <section id="about">
-        <!-- Judul diganti menjadi About Me -->
         <h2 class="section-title reveal">About Me</h2>
         
         <div class="about-container">
             
             <!-- Card Pendidikan -->
             <div class="about-card reveal">
-                <div class="card-icon icon-edu">
+                <div class="card-icon">
                     <i class="fas fa-graduation-cap"></i>
                 </div>
                 <h3>Karir Pendidikan</h3>
@@ -586,7 +642,7 @@
 
             <!-- Card Organisasi -->
             <div class="about-card reveal">
-                <div class="card-icon icon-org">
+                <div class="card-icon">
                     <i class="fas fa-users-cog"></i>
                 </div>
                 <h3>Pengalaman Organisasi</h3>
@@ -608,7 +664,7 @@
 
             <!-- Card Hobi -->
             <div class="about-card reveal">
-                <div class="card-icon icon-hobby">
+                <div class="card-icon">
                     <i class="fas fa-running"></i>
                 </div>
                 <h3>Hobi</h3>
@@ -625,15 +681,15 @@
                 </div>
             </div>
 
-            <!-- Card Prestasi -->
+            <!-- Card Prestasi (Typography Fixed) -->
             <div class="about-card reveal">
-                <div class="card-icon icon-achieve">
+                <div class="card-icon">
                     <i class="fas fa-trophy"></i>
                 </div>
                 <h3>Prestasi</h3>
                 <div class="info-list">
                     <div class="info-item">
-                        <span class="label">Jambore Pandu Ngenal</span>
+                        <span class="label">Jambore Pandu Pengenalan</span>
                         <span class="value">Juara Umum 3 (Se-Kabupaten Lamongan)</span>
                     </div>
                     <div class="info-item">
@@ -652,7 +708,6 @@
 
     <!-- Contact Me Section -->
     <section id="contact">
-        <!-- Judul diganti menjadi Contact Me -->
         <h2 class="section-title reveal">Contact Me</h2>
         <div class="contact-grid">
             
@@ -717,7 +772,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2023 Arlen Davy Saputra. Dibuat dengan <i class="fas fa-heart" style="color: #ef4444;"></i> dan Semangat.</p>
+        <p>&copy; 2023 Arlen Davy Saputra. Burgundy & Silver Luxury Edition.</p>
     </footer>
 
     <!-- Script Interaktif -->

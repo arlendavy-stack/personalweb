@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arlen Davy Saputra - Personal Web</title>
+    <!-- Font Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CSS Variables yang diperbarui untuk tampilan modern */
+        :root {
+            --primary: #2563eb;       /* Biru Royal lebih cerah */
+            --secondary: #0f172a;     /* Biru Gelap (Slate) */
+            --accent: #3b82f6;        /* Biru Terang */
+            --gold: #f59e0b;          /* Emas Prestasi */
+            --bg-body: #f8fafc;       /* Abu-abu sangat muda */
+            --text-main: #334155;     /* Teks utama */
+            --text-light: #64748b;    /* Teks sekunder */
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.85);
+            --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.08);
+            --shadow-hover: 0 20px 40px -10px rgba(37, 99, 235, 0.15);
+            --radius: 24px;
+        }
+
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-body);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animasi Scroll (Fade Up) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navigasi Glassmorphism */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1000px;
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            z-index: 1000;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--secondary);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            cursor: pointer;
+        }
+
+        /* Section Umum */
+        section {
+            padding: 8rem 5% 5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* HOME SECTION */
+        #home {
+            background: radial-gradient(circle at top right, #dbeafe 0%, transparent 40%),
+                        radial-gradient(circle at bottom left, #e0e7ff 0%, transparent 40%);
+            min-height: 90vh;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-pic-container {
+            position: relative;
+            margin-bottom: 2rem;
+            display: inline-block;
+        }
+
+        .profile-pic-home {
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center top;
+            border: 6px solid var(--white);
+            position: relative;
+            z-index: 2;
+            transition: transform 0.5s ease;
+        }
+
+        /* Efek Cincin Berdenyut di belakang foto */
+        .profile-glow {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            z-index: 1;
+            animation: pulse 2s infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.05); opacity: 0.4; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+
+        /* Style untuk "Hello I am" */
+        .greeting {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .home-content h1 {
+            font-size: 3.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .motto-home {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--primary);
+            background: rgba(59, 130, 246, 0.1);
+            padding: 0.6rem 2rem;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .about-description {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 3rem auto;
+            font-weight: 300;
+        }
+
+        .scroll-down {
+            color: var(--primary);
+            font-size: 1.5rem;
+            animation: float 2s infinite ease-in-out;
+            cursor: pointer;
+        }
+
+        @keyframes float {
+            0%, 100% {transform: translateY(0);}
+            50% {transform: translateY(10px);}
+        }
+
+        /* ABOUT SECTION */
+        #about {
+            padding-top: 4rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+            color: var(--secondary);
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            width: 100%;
+        }
+
+        .about-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(255,255,255,0.8);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .about-card:hover::before {
+            opacity: 1;
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            transition: transform 0.3s;
+        }
+
+        .about-card:hover .card-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .about-card h3 {
+            color: var(--secondary);
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* Warna Ikon Berbeda per Kategori */
+        .icon-edu { color: var(--primary); background: #eff6ff; }
+        .icon-org { color: #8b5cf6; background: #f5f3ff; }
+        .icon-hobby { color: #10b981; background: #ecfdf5; }
+        .icon-achieve { color: var(--gold); background: #fffbeb; }
+
+        .info-list {
+            text-align: left;
+        }
+
+        .info-item {
+            margin-bottom: 1.2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px dashed #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            transition: padding-left 0.3s;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .about-card:hover .info-item {
+            padding-left: 10px; /* Sedikit geser saat hover */
+        }
+
+        .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            color: #94a3b8;
+            margin-bottom: 0.3rem;
+        }
+
+        .value {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+
+        /* CONTACT SECTION */
+        #contact {
+            background-color: var(--secondary);
+            background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 100%);
+            color: var(--white);
+            padding-bottom: 6rem;
+            position: relative;
+        }
+        
+        #contact .section-title {
+            color: var(--white);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-icon-box {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .contact-info h4 {
+            font-size: 0.8rem;
+            opacity: 0.6;
+            margin-bottom: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-info span {
+            font-weight: 500;
+            color: var(--white);
+            font-size: 1rem;
+            word-break: break-word;
+        }
+
+        footer {
+            background: #020617;
+            color: #475569;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            nav {
+                width: 95%;
+                padding: 0.8rem 1.2rem;
+                top: 10px;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+                border-radius: 20px;
+                border: 1px solid #f1f5f9;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .home-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .motto-home {
+                font-size: 1rem;
+                padding: 0.5rem 1.5rem;
+            }
+
+            .about-description {
+                font-size: 0.95rem;
+            }
+
+            .profile-pic-home {
+                width: 180px;
+                height: 180px;
+            }
+            
+            section {
+                padding-top: 6rem;
+            }
+            
+            #home {
+                padding-top: 8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigasi Modern -->
+    <nav>
+        <a href="#" class="logo">Arlen<span>.</span></a>
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <!-- Menu diubah menjadi About Me -->
+            <li><a href="#about">About Me</a></li>
+            <!-- Menu diubah menjadi Contact Me -->
+            <li><a href="#contact">Contact Me</a></li>
+        </ul>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+        <div class="home-content reveal">
+            <div class="profile-pic-container">
+                <div class="profile-glow"></div>
+                <img src="https://z-cdn-media.chatglm.cn/files/9a875a72-5abe-4b46-b6f8-a21c4b6e5d07.png?auth_key=1868451674-99596320bdf4400598df7f31d615e46a-0-1324d40c446b6c60f606afe7a6f79511" alt="Foto Profil Arlen" class="profile-pic-home">
+            </div>
+            
+            <!-- Teks Hello I am ditambahkan -->
+            <span class="greeting">Hello, I am</span>
+            <h1>Arlen Davy Saputra</h1>
+            
+            <p class="motto-home">"Bermimpi besar, bertindak lebih besar"</p>
+            
+            <p class="about-description">
+                Siswa Madrasah Aliyah (Program ITCP) yang disiplin, jujur, dan memiliki semangat belajar tinggi. Serta aktif dalam organisasi siswa (IPM/HW) dengan kemampuan komunikasi dan kerja sama tim yang baik. Siap berkontribusi dan berkembang dalam lingkungan kerja profesional.
+            </p>
+        </div>
+        
+        <div class="scroll-down" onclick="document.getElementById('about').scrollIntoView();">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about">
+        <!-- Judul diganti menjadi About Me -->
+        <h2 class="section-title reveal">About Me</h2>
+        
+        <div class="about-container">
+            
+            <!-- Card Pendidikan -->
+            <div class="about-card reveal">
+                <div class="card-icon icon-edu">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>Karir Pendidikan</h3>
+                <div class="info-list">
+                    <div class="info-item">
+                        <span class="label">SD/MI</span>
+                        <span class="value">MIM 1 KALEN (2020)</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">SMP/MTs</span>
+                        <span class="value">MTsM 2 Karangasem (2023)</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">SMA/MA/SMK</span>
+                        <span class="value">MAM 1 Karangasem (2026)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Organisasi -->
+            <div class="about-card reveal">
+                <div class="card-icon icon-org">
+                    <i class="fas fa-users-cog"></i>
+                </div>
+                <h3>Pengalaman Organisasi</h3>
+                <div class="info-list">
+                    <div class="info-item">
+                        <span class="label">OPPKM</span>
+                        <span class="value">Organisasi Pelajar Pondok Pesantren Karangasem Muhammadiyah (Wakil Ketua)</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Pimpinan Ranting IPM MAM 1</span>
+                        <span class="value">Sekbid Olahraga</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Dewan Kerabat MAM 1</span>
+                        <span class="value">Sekretaris Umum</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Hobi -->
+            <div class="about-card reveal">
+                <div class="card-icon icon-hobby">
+                    <i class="fas fa-running"></i>
+                </div>
+                <h3>Hobi</h3>
+                <div class="info-list">
+                    <div class="info-item">
+                        <span class="value">Voli</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="value">Sepak Bola</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="value">Traveling</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Prestasi -->
+            <div class="about-card reveal">
+                <div class="card-icon icon-achieve">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h3>Prestasi</h3>
+                <div class="info-list">
+                    <div class="info-item">
+                        <span class="label">Jambore Pandu Ngenal</span>
+                        <span class="value">Juara Umum 3 (Se-Kabupaten Lamongan)</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Volly (WahasCup)</span>
+                        <span class="value">Juara 2 (Sekresidenan Bojonegoro)</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Volly (Milad Muhammadiyah 113)</span>
+                        <span class="value">Juara 3</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact Me Section -->
+    <section id="contact">
+        <!-- Judul diganti menjadi Contact Me -->
+        <h2 class="section-title reveal">Contact Me</h2>
+        <div class="contact-grid">
+            
+            <a href="#" class="contact-item reveal">
+                <div class="contact-icon-box"><i class="fas fa-user"></i></div>
+                <div class="contact-info">
+                    <h4>Nama Lengkap</h4>
+                    <span>Arlen Davy Saputra</span>
+                </div>
+            </a>
+
+            <a href="#" class="contact-item reveal">
+                <div class="contact-icon-box"><i class="fas fa-birthday-cake"></i></div>
+                <div class="contact-info">
+                    <h4>Tempat, Tanggal Lahir</h4>
+                    <span>Lamongan, 24 Maret 2008</span>
+                </div>
+            </a>
+
+            <a href="mailto:arlendavy@gmail.com" class="contact-item reveal">
+                <div class="contact-icon-box"><i class="fas fa-envelope"></i></div>
+                <div class="contact-info">
+                    <h4>Email</h4>
+                    <span>arlendavy@gmail.com</span>
+                </div>
+            </a>
+
+            <a href="https://arlendavy.my.id" target="_blank" class="contact-item reveal">
+                <div class="contact-icon-box"><i class="fas fa-globe"></i></div>
+                <div class="contact-info">
+                    <h4>Website</h4>
+                    <span>arlendavy.my.id</span>
+                </div>
+            </a>
+
+            <a href="#" class="contact-item reveal">
+                <div class="contact-icon-box"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="contact-info">
+                    <h4>Alamat</h4>
+                    <span>Kalen Kedungpring, Lamongan</span>
+                </div>
+            </a>
+
+            <a href="https://wa.me/6285747835437" target="_blank" class="contact-item reveal">
+                <div class="contact-icon-box"><i class="fas fa-phone-alt"></i></div>
+                <div class="contact-info">
+                    <h4>Telepon / WhatsApp</h4>
+                    <span>085747835437</span>
+                </div>
+            </a>
+
+            <a href="https://instagram.com/arlendvv" target="_blank" class="contact-item reveal">
+                <div class="contact-icon-box"><i class="fab fa-instagram"></i></div>
+                <div class="contact-info">
+                    <h4>Instagram</h4>
+                    <span>@arlendvv</span>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 Arlen Davy Saputra. Dibuat dengan <i class="fas fa-heart" style="color: #ef4444;"></i> dan Semangat.</p>
+    </footer>
+
+    <!-- Script Interaktif -->
+    <script>
+        const menuToggle = document.getElementById('mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            if(navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.querySelector('i').classList.remove('fa-times');
+                menuToggle.querySelector('i').classList.add('fa-bars');
+            });
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
